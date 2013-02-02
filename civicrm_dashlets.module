@@ -1,0 +1,189 @@
+<?php
+
+/**
+ * @file
+ * Non-report CiviCRM dashlets 
+ * 
+ */
+
+/**
+ * Implements hook_help().
+ */
+function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
+  switch ($path) {
+    case 'admin/help#civicrm_dashlets':
+      return t('This module integrates with CiviCRM dashboard to allow custom dashlets.');
+  }
+}
+
+
+
+
+
+/**
+ * Implements hook_menu().
+ */
+function civicrm_dashlets_menu() {
+  $items = array();
+
+  $items['admin/config/civicrm-dashlets'] = array(
+      'title' => 'CiviCRM Dashlets',
+	  'description' => 'Allows admins to manage CiviCRM Dashlets',
+      'page callback' => 'drupal_get_form',
+      'access arguments' => array('administer civicrm_dashlets'),
+      'page callback' => 'civicrm_dashlets_settings_form',
+  );
+
+  $items['admin/config/civicrm-dashlets/settings'] = array(
+    'title' => 'CiviCRM Dashlets Settings',
+    'description' => 'Description of your On this date settings page',
+    'page arguments' => array('civicrm_dashlets_settings_form'),
+    'access arguments' => array('administer civicrm_dashlets'),
+    'type' => MENU_NORMAL_ITEM,
+   );
+  return $items;
+}
+
+/**
+ * User Permissions
+ */
+
+function civicrm_dashlets_permission() {
+  return array(
+    'administer civicrm_dashlets' => array(
+      'title' => t('Administer CiviCRM Dashlets'), 
+      'description' => t('Perform administration tasks for CiviCRM Dashlets.'),
+    ),
+  );
+} 
+
+
+
+/**
+ * @file
+ * Administration page callbacks for the CiviCRM Dashlets module.
+ */
+function civicrm_dashlets_settings_form(){
+  //Google
+  $form['google'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Google'),
+	'#collapsible' => TRUE,
+  );
+  $form['google']['google_plus'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Google Plus ID'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );
+  $form['google']['ga_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Google Analytics Profile ID'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );
+    
+  $form['google']['ga_pass'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Google Analytics Password'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );
+  
+  $form['google']['gmail'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Google Analytics Email'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );
+  
+  //Facebook
+  $form['facebook'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Facebook'),
+	'#collapsible' => TRUE,
+  );
+  $form['facebook']['facebook_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook ID'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );
+
+  //Twitter 
+  $form['twitter'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Twitter'),
+	'#collapsible' => TRUE,
+  );
+  $form['twitter']['twitter_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Twitter ID'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );
+  
+  //Keyword Searches
+  $form['keyword'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Keyword Search'),
+  ); 
+  $form['keyword']['headlines'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Google Alerts'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );
+
+  $form['keyword']['blogsphere'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Blogsphere'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+    );
+
+ $form['redmine_tracker_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Subject'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );  
+
+  $form['instructions2'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Subject'),
+    '#rows' => 1,
+    '#resizable' => FALSE,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  $form['clear'] = array(
+    '#name' => 'clear',
+    '#type' => 'button',
+    '#value' => t('Reset'),
+	'#validate' => array(),
+    '#attributes' => array('onclick' => 'this.form.reset(); return false;'),
+  );
+
+  return $form;
+ }
+
+//Validate Email 
+function civicrm_dashlets_valid_email_address($gmail) {
+  return (bool) filter_var($gmail, FILTER_VALIDATE_EMAIL);
+}
+
+//Validate form
+function civicrm_dashlets_page_form_validate($form, $form_state) {
+  if (!$form_state['values']['twitter_id']) {
+    form_set_error('twitter_id', t('Please enter a Subject'));
+  }
+  if (!$form_state['values']['facebook_id']) {
+    form_set_error('facebook_id', t('Please enter a description'));
+  }
+}
+
