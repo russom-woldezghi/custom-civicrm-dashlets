@@ -129,9 +129,10 @@ function civicrm_dashlets_settings_form(){
     '#title' => t('Keyword Search'),
   ); 
   $form['keyword']['headlines'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Google Alerts'),
-    '#rows' => 1,
+    '#type' => 'textarea',
+	'#description' => t('Enter keywords seperate by "+"; Example: sample+word'),
+	'#title' => t('Google Alerts'),
+    '#rows' => 6,
     '#resizable' => FALSE,
   );
 
@@ -175,6 +176,14 @@ function civicrm_dashlets_settings_form(){
 //Validate Email 
 function civicrm_dashlets_valid_email_address($gmail) {
   return (bool) filter_var($gmail, FILTER_VALIDATE_EMAIL);
+}
+
+//Validate Keyword field to use "+" sign to seperate text for headlines field
+$headlines = preg_split('[,|;]',$_POST['headlines']);
+foreach($headlines as $h){
+    if(preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/',trim($h)) == 0){
+        echo($h ."is not using plus "+" to seperate words.");
+    }
 }
 
 //Validate form
