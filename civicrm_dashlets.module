@@ -15,11 +15,6 @@ function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
       return t('This module integrates with CiviCRM dashboard to allow custom dashlets.');
   }
 }
-
-
-
-
-
 /**
  * Implements hook_menu().
  */
@@ -45,7 +40,7 @@ function civicrm_dashlets_menu() {
 }
 
 /**
- * User Permissions
+ * CiviCRM Dashlets User Permissions
  */
 
 function civicrm_dashlets_permission() {
@@ -56,8 +51,6 @@ function civicrm_dashlets_permission() {
     ),
   );
 } 
-
-
 
 /**
  * @file
@@ -158,16 +151,9 @@ function civicrm_dashlets_settings_form(){
   );
 
   $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'),
-  );
-
-  $form['clear'] = array(
-    '#name' => 'clear',
+    '#name' => 'submit',
     '#type' => 'button',
-    '#value' => t('Reset'),
-	'#validate' => array(),
-    '#attributes' => array('onclick' => 'this.form.reset(); return false;'),
+    '#title' => t('Save'),
   );
 
   return $form;
@@ -176,14 +162,6 @@ function civicrm_dashlets_settings_form(){
 //Validate Email 
 function civicrm_dashlets_valid_email_address($gmail) {
   return (bool) filter_var($gmail, FILTER_VALIDATE_EMAIL);
-}
-
-//Validate Keyword field to use "+" sign to seperate text for headlines field
-$headlines = preg_split('[,|;]',$_POST['headlines']);
-foreach($headlines as $h){
-    if(preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/',trim($h)) == 0){
-        echo($h ."is not using plus "+" to seperate words.");
-    }
 }
 
 //Validate form
@@ -195,4 +173,3 @@ function civicrm_dashlets_page_form_validate($form, $form_state) {
     form_set_error('facebook_id', t('Please enter a description'));
   }
 }
-

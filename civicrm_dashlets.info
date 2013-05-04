@@ -1,5 +1,5 @@
 name = CiviCRM Dashlets
 description = Add non-report dashlets to CiviCRM
 core = 7.x
-package = CiviCRM Dashlets
+package = CiviCRM
 dependencies[] = civicrm
