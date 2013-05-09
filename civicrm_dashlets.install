@@ -1,3 +1,4 @@
+<?php
 /**
   * Implement hook_enable(); create CiviCRM Dashlets table
   */
@@ -5,4 +6,5 @@ function civicrm_dashlets_enable() {
 drupal_set_message($message = t('The CiviCRM Dashlets  module was successfully enabled.'), $type = 'status');
 if(db_table_exists('civicrm_dashlets') == FALSE) {
     drupal_install_schema('civicrm_dashlets');
+}
 }
