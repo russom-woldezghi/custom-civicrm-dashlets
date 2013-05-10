@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Non-report CiviCRM dashlets 
@@ -10,17 +11,18 @@ function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
       return t('This module integrates with CiviCRM dashboard to allow custom dashlets.');
   }
 }
+
 /**
  * Implements hook_menu().
  */
 function civicrm_dashlets_menu() {
   $items = array();
   $items['admin/config/civicrm-dashlets'] = array(
-      'title' => 'CiviCRM Dashlets',
-	  'description' => 'Allows admins to manage CiviCRM Dashlets',
-      'page callback' => 'drupal_get_form',
-      'access arguments' => array('administer civicrm_dashlets'),
-      'page callback' => 'civicrm_dashlets_settings_form',
+    'title' => 'CiviCRM Dashlets',
+    'description' => 'Allows admins to manage CiviCRM Dashlets',
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('administer civicrm_dashlets'),
+    'page callback' => 'civicrm_dashlets_settings_form',
   );
   $items['admin/config/civicrm-dashlets/settings'] = array(
     'title' => 'CiviCRM Dashlets Settings',
@@ -28,30 +30,32 @@ function civicrm_dashlets_menu() {
     'page arguments' => array('civicrm_dashlets_settings_form'),
     'access arguments' => array('administer civicrm_dashlets'),
     'type' => MENU_NORMAL_ITEM,
-   );
+  );
   return $items;
 }
+
 /**
  * User Permissions
  */
 function civicrm_dashlets_permission() {
   return array(
     'administer civicrm_dashlets' => array(
-      'title' => t('Administer CiviCRM Dashlets'), 
+      'title' => t('Administer CiviCRM Dashlets'),
       'description' => t('Perform administration tasks for CiviCRM Dashlets.'),
     ),
   );
-} 
+}
+
 /**
  * @file
  * Administration page callbacks for the CiviCRM Dashlets module.
  */
-function civicrm_dashlets_settings_form(){
+function civicrm_dashlets_settings_form() {
   //Google
   $form['google'] = array(
     '#type' => 'fieldset',
     '#title' => t('Google'),
-	'#collapsible' => TRUE,
+    '#collapsible' => TRUE,
   );
   $form['google']['google_plus'] = array(
     '#type' => 'textfield',
@@ -81,7 +85,7 @@ function civicrm_dashlets_settings_form(){
   $form['facebook'] = array(
     '#type' => 'fieldset',
     '#title' => t('Facebook'),
-	'#collapsible' => TRUE,
+    '#collapsible' => TRUE,
   );
   $form['facebook']['facebook_id'] = array(
     '#type' => 'textfield',
@@ -93,7 +97,7 @@ function civicrm_dashlets_settings_form(){
   $form['twitter'] = array(
     '#type' => 'fieldset',
     '#title' => t('Twitter'),
-	'#collapsible' => TRUE,
+    '#collapsible' => TRUE,
   );
   $form['twitter']['twitter_id'] = array(
     '#type' => 'textfield',
@@ -105,11 +109,11 @@ function civicrm_dashlets_settings_form(){
   $form['keyword'] = array(
     '#type' => 'fieldset',
     '#title' => t('Keyword Search'),
-  ); 
+  );
   $form['keyword']['headlines'] = array(
     '#type' => 'textarea',
-	'#description' => t('Enter keywords seperate by "+"; Example: sample+word'),
-	'#title' => t('Google Alerts'),
+    '#description' => t('Enter keywords seperate by "+"; Example: sample+word'),
+    '#title' => t('Google Alerts'),
     '#rows' => 6,
     '#resizable' => FALSE,
   );
@@ -118,13 +122,13 @@ function civicrm_dashlets_settings_form(){
     '#title' => t('Blogsphere'),
     '#rows' => 1,
     '#resizable' => FALSE,
-    );
- $form['redmine_tracker_id'] = array(
+  );
+  $form['redmine_tracker_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Subject'),
     '#rows' => 1,
     '#resizable' => FALSE,
-  );  
+  );
   $form['instructions2'] = array(
     '#type' => 'textfield',
     '#title' => t('Subject'),
@@ -139,8 +143,8 @@ function civicrm_dashlets_settings_form(){
     '#name' => 'clear',
     '#type' => 'button',
     '#value' => t('Reset'),
-	'#validate' => array(),
+    '#validate' => array(),
     '#attributes' => array('onclick' => 'this.form.reset(); return false;'),
   );
   return $form;
- }
+}
