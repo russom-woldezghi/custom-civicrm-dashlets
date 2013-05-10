@@ -2,10 +2,6 @@
 /**
  * @file
  * Non-report CiviCRM dashlets 
- * 
- */
-
-/**
  * Implements hook_help().
  */
 function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
@@ -19,7 +15,6 @@ function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
  */
 function civicrm_dashlets_menu() {
   $items = array();
-
   $items['admin/config/civicrm-dashlets'] = array(
       'title' => 'CiviCRM Dashlets',
 	  'description' => 'Allows admins to manage CiviCRM Dashlets',
@@ -27,7 +22,6 @@ function civicrm_dashlets_menu() {
       'access arguments' => array('administer civicrm_dashlets'),
       'page callback' => 'civicrm_dashlets_settings_form',
   );
-
   $items['admin/config/civicrm-dashlets/settings'] = array(
     'title' => 'CiviCRM Dashlets Settings',
     'description' => 'Description of your On this date settings page',
@@ -37,11 +31,9 @@ function civicrm_dashlets_menu() {
    );
   return $items;
 }
-
 /**
  * User Permissions
  */
-
 function civicrm_dashlets_permission() {
   return array(
     'administer civicrm_dashlets' => array(
@@ -50,9 +42,6 @@ function civicrm_dashlets_permission() {
     ),
   );
 } 
-
-
-
 /**
  * @file
  * Administration page callbacks for the CiviCRM Dashlets module.
@@ -76,21 +65,18 @@ function civicrm_dashlets_settings_form(){
     '#rows' => 1,
     '#resizable' => FALSE,
   );
-    
   $form['google']['ga_pass'] = array(
     '#type' => 'textfield',
     '#title' => t('Google Analytics Password'),
     '#rows' => 1,
     '#resizable' => FALSE,
   );
-  
   $form['google']['gmail'] = array(
     '#type' => 'textfield',
     '#title' => t('Google Analytics Email'),
     '#rows' => 1,
     '#resizable' => FALSE,
   );
-  
   //Facebook
   $form['facebook'] = array(
     '#type' => 'fieldset',
@@ -103,7 +89,6 @@ function civicrm_dashlets_settings_form(){
     '#rows' => 1,
     '#resizable' => FALSE,
   );
-
   //Twitter 
   $form['twitter'] = array(
     '#type' => 'fieldset',
@@ -116,7 +101,6 @@ function civicrm_dashlets_settings_form(){
     '#rows' => 1,
     '#resizable' => FALSE,
   );
-  
   //Keyword Searches
   $form['keyword'] = array(
     '#type' => 'fieldset',
@@ -129,33 +113,28 @@ function civicrm_dashlets_settings_form(){
     '#rows' => 6,
     '#resizable' => FALSE,
   );
-
   $form['keyword']['blogsphere'] = array(
     '#type' => 'textfield',
     '#title' => t('Blogsphere'),
     '#rows' => 1,
     '#resizable' => FALSE,
     );
-
  $form['redmine_tracker_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Subject'),
     '#rows' => 1,
     '#resizable' => FALSE,
   );  
-
   $form['instructions2'] = array(
     '#type' => 'textfield',
     '#title' => t('Subject'),
     '#rows' => 1,
     '#resizable' => FALSE,
   );
-
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
-
   $form['clear'] = array(
     '#name' => 'clear',
     '#type' => 'button',
@@ -163,6 +142,5 @@ function civicrm_dashlets_settings_form(){
 	'#validate' => array(),
     '#attributes' => array('onclick' => 'this.form.reset(); return false;'),
   );
-
   return $form;
  }
