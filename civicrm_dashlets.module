@@ -50,101 +50,35 @@ function civicrm_dashlets_permission() {
  * @file
  * Administration page callbacks for the CiviCRM Dashlets module.
  */
-function civicrm_dashlets_settings_form() {
-  //Google
-  $form['google'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Google'),
-    '#collapsible' => TRUE,
-  );
-  $form['google']['google_plus'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Google Plus ID'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  $form['google']['ga_id'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Google Analytics Profile ID'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  $form['google']['ga_pass'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Google Analytics Password'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  $form['google']['gmail'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Google Analytics Email'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  //Facebook
-  $form['facebook'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Facebook'),
-    '#collapsible' => TRUE,
-  );
-  $form['facebook']['facebook_id'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Facebook ID'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  //Twitter 
-  $form['twitter'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Twitter'),
-    '#collapsible' => TRUE,
-  );
-  $form['twitter']['twitter_id'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Twitter ID'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  //Keyword Searches
-  $form['keyword'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Keyword Search'),
-  );
-  $form['keyword']['headlines'] = array(
-    '#type' => 'textarea',
-    '#description' => t('Enter keywords seperate by "+"; Example: sample+word'),
-    '#title' => t('Google Alerts'),
-    '#rows' => 6,
-    '#resizable' => FALSE,
-  );
-  $form['keyword']['blogsphere'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Blogsphere'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  $form['redmine_tracker_id'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Subject'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  $form['instructions2'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Subject'),
-    '#rows' => 1,
-    '#resizable' => FALSE,
-  );
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Submit'),
-  );
-  $form['clear'] = array(
-    '#name' => 'clear',
-    '#type' => 'button',
-    '#value' => t('Reset'),
-    '#validate' => array(),
-    '#attributes' => array('onclick' => 'this.form.reset(); return false;'),
-  );
-  return $form;
+function civicrm_dashlets_civicrm_links( $op, $objectName, $objectId, &$links ) {
+  $myLinks = array();
+  switch ($objectName) {
+    case 'Contact':
+      switch ($op) {
+        case 'view.contact.activity':
+          // Adds a link to the main tab.
+          $myLinks[] = array(
+            'id' => 'civicrm-dashlets',
+            'title' => 'CiviCRM Dashlets',
+            'url' => 'civicrm-dashlets/civicrm/actions/'. $objectId,
+            'weight' => 10,
+            'ref'    => 'civicrm-dashlets' // this is unique identifier for this link
+          );
+          break;
+ 
+         case 'view.contact.userDashBoard':
+           // take the update link and move it to the profile
+           $links[CRM_Core_Action::UPDATE]['url'] = 'civicrm/profile/edit';
+           $links[CRM_Core_Action::UPDATE]['qs' ] = "reset=1&gid=" . REGSITE_PROFILE_ID . "&id=%%cbid%%";
+           break;
+ 
+         case 'create.new.shorcuts':
+           // add link to create new profile
+           $links[] = array( 'url'   => '/civicrm/admin/uf/group?action=add&reset=1',
+                        'title' => ts('CiviCRM Dashlets Shortcuts'),
+                        'ref'   => 'civicrm-dashlets');
+           break;
+      }
+  }
+  return $myLinks;
 }
