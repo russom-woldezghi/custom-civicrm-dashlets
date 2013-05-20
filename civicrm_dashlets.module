@@ -48,37 +48,9 @@ function civicrm_dashlets_permission() {
 
 /**
  * @file
- * Administration page callbacks for the CiviCRM Dashlets module.
+ * CiviCRM link in configure your dashboard
  */
-function civicrm_dashlets_civicrm_links( $op, $objectName, $objectId, &$links ) {
-  $myLinks = array();
-  switch ($objectName) {
-    case 'Contact':
-      switch ($op) {
-        case 'view.contact.activity':
-          // Adds a link to the main tab.
-          $myLinks[] = array(
-            'id' => 'civicrm-dashlets',
-            'title' => 'CiviCRM Dashlets',
-            'url' => 'civicrm-dashlets/civicrm/actions/'. $objectId,
-            'weight' => 10,
-            'ref'    => 'civicrm-dashlets' // this is unique identifier for this link
-          );
-          break;
- 
-         case 'view.contact.userDashBoard':
-           // take the update link and move it to the profile
-           $links[CRM_Core_Action::UPDATE]['url'] = 'civicrm/profile/edit';
-           $links[CRM_Core_Action::UPDATE]['qs' ] = "reset=1&gid=" . REGSITE_PROFILE_ID . "&id=%%cbid%%";
-           break;
- 
-         case 'create.new.shorcuts':
-           // add link to create new profile
-           $links[] = array( 'url'   => '/civicrm/admin/uf/group?action=add&reset=1',
-                        'title' => ts('CiviCRM Dashlets Shortcuts'),
-                        'ref'   => 'civicrm-dashlets');
-           break;
-      }
-  }
-  return $myLinks;
+function civicrm_dashlets_civicrm_dashboard($contactID, &$contentPlacement)
+{
+drupal_add_js(drupal_get_path('module', 'civicrm_dashlets') . '/dashlets.js');
 }
