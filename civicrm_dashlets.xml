@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!--Menu settings-->
+<menu>
+  <item>
+    <path>civicrm/admin/setting/dashlets</path>
+    <page_callback>CRM_Admin_Page_CiviCRMDashlets</page_callback>
+    <title>CiviCRM Dashlets</title>
+    <access_arguments>administer civicrm_dashlets</access_arguments>
+  </item>
+</menu>

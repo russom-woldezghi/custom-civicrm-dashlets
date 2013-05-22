@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Non-report CiviCRM dashlets 
+ * Add Non-report CiviCRM dashlets 
  * Implements hook_help().
  */
 function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
@@ -12,27 +12,27 @@ function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
   }
 }
 
-/**
- * Implements hook_menu().
- */
-function civicrm_dashlets_menu() {
-  $items = array();
-  $items['admin/config/civicrm-dashlets'] = array(
-    'title' => 'CiviCRM Dashlets',
-    'description' => 'Allows admins to manage CiviCRM Dashlets',
-    'page callback' => 'drupal_get_form',
-    'access arguments' => array('administer civicrm_dashlets'),
-    'page callback' => 'civicrm_dashlets_settings_form',
-  );
-  $items['admin/config/civicrm-dashlets/settings'] = array(
-    'title' => 'CiviCRM Dashlets Settings',
-    'description' => 'Description of your On this date settings page',
-    'page arguments' => array('civicrm_dashlets_settings_form'),
-    'access arguments' => array('administer civicrm_dashlets'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  return $items;
-}
+///**
+// * Implements hook_menu().
+// */
+//function civicrm_dashlets_menu() {
+//  $items = array();
+//  $items['admin/config/civicrm-dashlets'] = array(
+//    'title' => 'CiviCRM Dashlets',
+//    'description' => 'Allows admins to manage CiviCRM Dashlets',
+//    'page callback' => 'drupal_get_form',
+//    'access arguments' => array('administer civicrm_dashlets'),
+//    'page callback' => 'civicrm_dashlets_settings_form',
+//  );
+//  $items['admin/config/civicrm-dashlets/settings'] = array(
+//    'title' => 'CiviCRM Dashlets Settings',
+//    'description' => 'Description of your On this date settings page',
+//    'page arguments' => array('civicrm_dashlets_settings_form'),
+//    'access arguments' => array('administer civicrm_dashlets'),
+//    'type' => MENU_NORMAL_ITEM,
+//  );
+//  return $items;
+//}
 
 /**
  * User Permissions
@@ -46,11 +46,35 @@ function civicrm_dashlets_permission() {
   );
 }
 
-/**
- * @file
- * CiviCRM link in configure your dashboard
- */
-function civicrm_dashlets_civicrm_dashboard($contactID, &$contentPlacement)
-{
-drupal_add_js(drupal_get_path('module', 'civicrm_dashlets') . '/dashlets.js');
+//link in configure your dashboard
+
+function civicrm_dashlets_civicrm_dashboard($contactID, &$contentPlacement) {
+  drupal_add_js(drupal_get_path('module', 'civicrm_dashlets') . '/dashlets.js');
+}
+
+//CiviCRM xmlMenu to list CiviCRM Dashlets CiviCRM Page
+function civicrm_dashlets_civicrm_xmlMenu( &$files ) {
+  // Get xml menu file
+   $files[] =
+        dirname( __FILE__ ) . DIRECTORY_SEPARATOR .
+       'civicrm_dashlets.xml';
+}
+
+function civicrm_dashlets_civicrm_config(&$config) {
+  $template =& CRM_Core_Smarty::singleton();
+ 
+  $root = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+  $template_dir = $root . 'templates';
+ 
+  // Add our template directory to the Smarty templates path
+  if (is_array($template->template_dir)) {
+    array_unshift($template->template_dir, $template_dir);
+  }
+  else {
+    $template->template_dir = array($template_dir, $template->template_dir);
+  }
+ 
+  // Also fix php include path
+  $include_path = $root . 'php' . DIRECTORY_SEPARATOR . PATH_SEPARATOR . get_include_path();
+  set_include_path($include_path);
 }
