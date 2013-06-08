@@ -23,22 +23,26 @@
  | see the CiviCRM license FAQ at http://civicrm.org/licensing        |
  +--------------------------------------------------------------------+
 *}
-
-<div class="crm-block crm-form-block crm-civicrm-dashlets-form-block">
+<div id="help" style="padding: 1em;">
+        {ts}Description/Help text here.{/ts}
+        {help id="id-add_dashlets" file="CRM/Admin/Form/Setting/CiviCRMDashlets.hlp" admin=$admin}
+</div>
+<br/>
+<div class="crm-block crm-form-block crm-mysettings-form-block">
   <div class="crm-submit-buttons">{include file="CRM/common/formButtons.tpl" location="top"}</div>
  
 <fieldset>
     <table class="form-layout">
-        <tr class="crm-civicrm-dashlets-form-block-specialty">
-          <td class="label">{$form.civicrm_dashlets_hcp_specialty.label}</td>
+        <tr class="crm-mysettings-form-block-specialty">
+          <td class="label">{$form.civicrmdashlets_dropdown.label}</td>
           <td>
-            {$form.civicrm_dashlets_hcp_specialty.html}
+            {$form.civicrmdashlets_dropdown.html}
           </td>
         </tr>
          <tr class="crm-mysettings-form-block-recipient">
-          <td class="label">{$form.civicrm_dashlets_recipient.label}</td>
+          <td class="label">{$form.civicrmdashlets_text.label}</td>
           <td>
-            {$form.civicrm_dashlets_recipient.html}
+            {$form.civicrmdashlets_text.html}
           </td>
         </tr>
    </table>

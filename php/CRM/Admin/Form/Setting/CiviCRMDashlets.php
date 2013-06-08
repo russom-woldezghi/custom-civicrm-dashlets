@@ -30,14 +30,20 @@
 /**
  * This class contains all the function that are called using AJAX
  */
-require_once 'CRM/Admin/Page/CiviCRMDashlets.php';
+ 
+require_once 'CRM/Admin/Form/Setting.php';
 require_once 'CRM/Core/BAO/CustomField.php';
+ 
 
-class CRM_Admin_Page_CiviCRMDashlets extends CRM_Core_Page {
+class CRM_Admin_Form_Setting_CiviCRMDashlets extends CRM_Admin_Form_Setting {
 
   public function buildQuickForm() {
-    CRM_Utils_System::setTitle(ts('Settings - My Custom Settings'));
+    CRM_Utils_System::setTitle(ts('CiviCRM Dashlets Settings'));
 
+
+   // $config = CRM_Core_Config::singleton();
+    //$civicrmdashlets_field_id1 = $config->civicrmdashlets_dropdown;
+    //$civicrmdashlets_field_id2 = $config->civicrmdashlets_text;
 
     $customFields = CRM_Core_BAO_CustomField::getFields();
     $cf = array();
@@ -45,11 +51,12 @@ class CRM_Admin_Page_CiviCRMDashlets extends CRM_Core_Page {
       $cf[$k] = $v['label'];
     }
 
-    $this->addElement('select', 'civicrm-dashlets_hcp_specialty', ts('Custom field for HCP specialty'), array('' => ts('- select -')) + $cf
+    $this->addElement('select', 'civicrmdashlets_dropdown', ts('Select1'), array('' => ts('- select -')) + $cf
     );
 
-    $this->addElement('text', 'civicrm-dashlets_recipient', ts('Email address to receive module notices')
+    $this->addElement('text', 'civicrmdashlets_text', ts('Text2')
     );
+    
 
     parent::buildQuickForm();
   }

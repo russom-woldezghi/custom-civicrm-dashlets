@@ -12,28 +12,6 @@ function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
   }
 }
 
-///**
-// * Implements hook_menu().
-// */
-//function civicrm_dashlets_menu() {
-//  $items = array();
-//  $items['admin/config/civicrm-dashlets'] = array(
-//    'title' => 'CiviCRM Dashlets',
-//    'description' => 'Allows admins to manage CiviCRM Dashlets',
-//    'page callback' => 'drupal_get_form',
-//    'access arguments' => array('administer civicrm_dashlets'),
-//    'page callback' => 'civicrm_dashlets_settings_form',
-//  );
-//  $items['admin/config/civicrm-dashlets/settings'] = array(
-//    'title' => 'CiviCRM Dashlets Settings',
-//    'description' => 'Description of your On this date settings page',
-//    'page arguments' => array('civicrm_dashlets_settings_form'),
-//    'access arguments' => array('administer civicrm_dashlets'),
-//    'type' => MENU_NORMAL_ITEM,
-//  );
-//  return $items;
-//}
-
 /**
  * User Permissions
  */
