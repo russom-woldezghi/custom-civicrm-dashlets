@@ -13,7 +13,7 @@ function civicrm_dashlets_help($path = 'admin/help#civicrm_dashlets') {
 }
 
 /**
- * User Permissions
+ * Implements hook_permissions 
  */
 function civicrm_dashlets_permission() {
   return array(
@@ -24,35 +24,46 @@ function civicrm_dashlets_permission() {
   );
 }
 
-//link in configure your dashboard
-
+/**
+ * Implements hook_civicrm_dashboard 
+ * Runs jQuery file to show Add More Dashlets button
+ */
 function civicrm_dashlets_civicrm_dashboard($contactID, &$contentPlacement) {
-  drupal_add_js(drupal_get_path('module', 'civicrm_dashlets') . '/dashlets.js');
+  drupal_add_js(drupal_get_path('module', 'civicrm_dashlets') . '/civicrm_dashlets.js');
 }
 
-//CiviCRM xmlMenu to list CiviCRM Dashlets CiviCRM Page
-function civicrm_dashlets_civicrm_xmlMenu( &$files ) {
+/*
+ * Implements hook_civicrm_xmlMenu
+ * List's CiviCRM Dashlets Settings Page on Administer CiviCRM page
+ */
+
+function civicrm_dashlets_civicrm_xmlMenu(&$files) {
   // Get xml menu file
-   $files[] =
-        dirname( __FILE__ ) . DIRECTORY_SEPARATOR .
-       'civicrm_dashlets.xml';
+  $files[] =
+      dirname(__FILE__) . DIRECTORY_SEPARATOR .
+      'civicrm_dashlets.xml';
 }
+
+/*
+ * Implements hook_civicrm_config 
+ * Sets path for Smarty template and php directories
+ */
 
 function civicrm_dashlets_civicrm_config(&$config) {
-  $template =& CRM_Core_Smarty::singleton();
- 
+  $template = & CRM_Core_Smarty::singleton();
+
   $root = dirname(__FILE__) . DIRECTORY_SEPARATOR;
   $template_dir = $root . 'templates';
- 
-  // Add our template directory to the Smarty templates path
+
+  // Add template directory to the Smarty templates path
   if (is_array($template->template_dir)) {
     array_unshift($template->template_dir, $template_dir);
   }
   else {
     $template->template_dir = array($template_dir, $template->template_dir);
   }
- 
-  // Also fix php include path
+
+  // Add php include path to the Smarty php path
   $include_path = $root . 'php' . DIRECTORY_SEPARATOR . PATH_SEPARATOR . get_include_path();
   set_include_path($include_path);
 }

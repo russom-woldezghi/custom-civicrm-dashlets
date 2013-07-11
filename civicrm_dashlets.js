@@ -1,6 +1,5 @@
 /* 
- * Add button
- * TODO: ajax
+ * Add Add More Dashlets button CiviCRM landing page
  */
   cj(function($) {
     $('#crm-dashboard-configure').click(function() {
