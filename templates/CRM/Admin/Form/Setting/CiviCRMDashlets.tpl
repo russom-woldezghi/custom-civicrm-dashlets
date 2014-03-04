@@ -11,31 +11,40 @@
   <fieldset>
     <table class="form-layout">
       <thead><h3>{ts}Add Dashlets{/ts}</h3></thead>
+    
         <tr class="crm-dashlets-form-field">
-          <td class="label">{$form.civicrmdashlets_text.label}</td>
+          <td class="label">
+            {$form.title.label}
+          </td>
           <td>
-            {$form.civicrmdashlets_text.html}
+            {$form.title.html}
           </td>
         </tr>
         <tr class="crm-dashlets-form-field">
-          <td class="label">{$form.civicrmdashlets_dropdown.label}</td>
-          <td>
-            {$form.civicrmdashlets_dropdown.html}
+          <td class="label">
+            {$form.permission.label}
           </td>
-        </tr>
-         
-        <tr class="crm-dashlets-form-field">
-          <td class="label">{$form.civicrmdashlets_textarea.label}</td>
           <td>
-            {$form.civicrmdashlets_textarea.html}
+            {$form.permission.html}
           </td>
         </tr>
         <tr class="crm-dashlets-form-field">
-          <td class="label">{$form.civicrmdashlets_checkbox.label}</td>
+          <td class="label">
+            {$form.status.label}
+          </td>
           <td>
-            {$form.civicrmdashlets_checkbox.html}
+            {$form.status.html}
+          </td>
+        </tr> 
+        <tr class="crm-dashlets-form-field">
+          <td class="label">
+            {$form.body.label}
+          </td>
+          <td>
+            {$form.body.html}
           </td>
         </tr>
+        
    </table>
  
     <div class="crm-submit-buttons">{include file="CRM/common/formButtons.tpl" location="bottom"}</div>

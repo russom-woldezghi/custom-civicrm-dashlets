@@ -8,7 +8,7 @@ function civicrm_dashlets_install() {
     return;
   }
   //provides civicrm_error handling
-  require_once('api/v2/utils.php');
+  require_once('api/v3/utils.php');
   $sql = "CREATE TABLE IF NOT EXISTS civicrm_dashlets (gid int, oid int);";
   $result = CRM_Core_DAO::executeQuery($sql);
   if (civicrm_error($result)) {

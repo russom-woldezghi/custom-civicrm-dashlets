@@ -5,6 +5,7 @@
     <path>civicrm/admin/setting/dashlets</path>
     <page_callback>CRM_Admin_Form_Setting_CiviCRMDashlets</page_callback>
     <title>CiviCRM Dashlets</title>
+    <adminGroup>System Settings</adminGroup>
     <access_arguments>administer civicrm_dashlets</access_arguments>
   </item>
 </menu>
