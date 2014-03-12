@@ -4,7 +4,7 @@
  */
 function civicrm_dashlets_install() {
   if (!civicrm_initialize()) {
-    drupal_set_message(st("Error enabling CiviCRM Dashlets. Unable to initialize CiviCRM for install"));
+    drupal_set_message(st("Error enabling CiviCRM Dashlets. Unable to initialize CiviCRM to install module. "));
     return;
   }
   //provides civicrm_error handling
@@ -18,3 +18,4 @@ function civicrm_dashlets_install() {
     drupal_set_message(st('CiviCRM Dashlets Module Installed Successfully'));
   }
 }
+

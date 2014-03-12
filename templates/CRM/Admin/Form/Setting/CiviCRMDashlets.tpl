@@ -8,16 +8,25 @@
 <div class="crm-block crm-form-block civicrm-dashlets-form-block">
 <div class="crm-submit-buttons">
   {include file="CRM/common/formButtons.tpl" location="bottom"}</div>      
+  
   <fieldset>
     <table class="form-layout">
       <thead><h3>{ts}Add Dashlets{/ts}</h3></thead>
     
         <tr class="crm-dashlets-form-field">
           <td class="label">
-            {$form.title.label}
+            {$form.label.label}
           </td>
           <td>
-            {$form.title.html}
+            {$form.label.html}
+          </td>
+        </tr>
+        <tr class="crm-dashlets-form-field">
+          <td class="label">
+            {$form.weight.label}
+          </td>
+          <td>
+            {$form.weight.html}
           </td>
         </tr>
         <tr class="crm-dashlets-form-field">
@@ -30,10 +39,10 @@
         </tr>
         <tr class="crm-dashlets-form-field">
           <td class="label">
-            {$form.status.label}
+            {$form.is_active.label}
           </td>
           <td>
-            {$form.status.html}
+            {$form.is_active.html}
           </td>
         </tr> 
         <tr class="crm-dashlets-form-field">
